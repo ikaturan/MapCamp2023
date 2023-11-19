@@ -36,6 +36,8 @@ const ICICS = {
   },
 }
 
+    }
+
 const locations = { 'ICICS': ICICS }
 
 function myMap() {
