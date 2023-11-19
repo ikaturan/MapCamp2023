@@ -6,20 +6,25 @@ var map;
 
 const ICICS = {
   
-  'Main Entrance':
+  mainEntrance:
   { position: { lat: 49.26112013421764, lng: -123.24931284699397 },
+    access: false,
     },
-    'Left Entrance':
+  leftEntrance:
   { position: { lat: 49.260732, lng: -123.248916 },
+    access: true,
      },
-  'Right Entrance':
+  rightEntrance:
   { position: { lat: 49.26142733612942, lng: -123.24900841627249},
+    access: true,
      },
-  'Back Entrance left side':
+  backEntranceLS:
   { position: { lat: 49.2611364, lng: -123.2483529 },
+    access: false,
      },
-  'Back Entrance right side':
+  backEntranceRS:
   { position: { lat: 49.2614651, lng: -123.248713 },
+    access: true,
      },
 
   
