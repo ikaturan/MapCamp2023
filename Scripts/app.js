@@ -4,17 +4,30 @@ var directionfields = { from: 49.2606, to: -123.2460 }
 var direction = document.getElementById("direction")
 var map;
 
-const locations = { 'ICICS': ICICS }
-
 const ICICS = {
-  mainEntrance: { lat: 49.26112013421764, lng: -123.24931284699397 },
-  leftEntrance: { lat: 49.260732, lng: -123.248916 },
-  rightEntrance: { lat: 49.26142733612942, lng: -123.24900841627249 },
-  backEntranceLeft: { lat: 49.2611364, lng: -123.2483529 },
-  backEntranceRight: { lat: 49.2614651, lng: -123.248713 },
-};
+  
+  mainEntrance:
+  { position: { lat: 49.26112013421764, lng: -123.24931284699397 },
+    access: false,
+    },
+  leftEntrance:
+  { position: { lat: 49.260732, lng: -123.248916 },
+    access: true,
+     },
+  rightEntrance:
+  { position: { lat: 49.26142733612942, lng: -123.24900841627249},
+    access: true,
+     },
+  backEntranceLS:
+  { position: { lat: 49.2611364, lng: -123.2483529 },
+    access: false,
+     },
+  backEntranceRS:
+  { position: { lat: 49.2614651, lng: -123.248713 },
+    access: true,
+     },
 
-
+const locations = { 'ICICS': ICICS }
 
 function myMap() {
   var mapProp = {
