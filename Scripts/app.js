@@ -1,5 +1,5 @@
 
-var directionfields = {from:49.2606, to:-123.2460}
+var directionfields = { from: 49.2606, to: -123.2460 }
 
 var direction = document.getElementById("direction")
 var map;
@@ -27,11 +27,7 @@ const ICICS = {
     access: true,
      },
 
-  
-
-  };
-
-  const locations = {'ICICS':ICICS}
+const locations = { 'ICICS': ICICS }
 
 function myMap() {
   var mapProp = {
@@ -41,26 +37,28 @@ function myMap() {
   map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
 
   const myCenter = { lat: 49.261199779342405, lng: -123.24890381012028 };
-  
+
 
 
 
   for (let building in locations) {
     let markers = locations[building];
-  
-      for (let id in markers) {
-        if (markers.hasOwnProperty(id)) {
-          let markerInfo = markers[id];
-      
-          let marker = new google.maps.Marker({
-            position: markerInfo.position,
-            map: map,
-            title: id,
-            icon: markerInfo.icon
-    });
 
-}}};
-  
+    for (let id in markers) {
+      if (markers.hasOwnProperty(id)) {
+        let markerInfo = markers[id];
+
+        let marker = new google.maps.Marker({
+          position: markerInfo.position,
+          map: map,
+          title: id,
+          icon: markerInfo.icon
+        });
+
+      }
+    }
+  };
+
 
 
 
@@ -85,65 +83,83 @@ function myMap() {
   const southEast = { lat: southEastLong, lng: southEastLat };
 
   //marker for NorthWest Starting Point
-  var markerNW = new google.maps.Marker({ 
+  var markerNW = new google.maps.Marker({
     id: "Main Mall",
     map,
     icon: 'http://maps.google.com/mapfiles/ms/icons/yellow-dot.png',
-    position: northWest });
+    position: northWest
+  });
 
   //marker for NorthEast Starting Point
-  var markerNE = new google.maps.Marker({ 
+  var markerNE = new google.maps.Marker({
     id: "UBC Chemical and Biological Engineering",
     map,
     icon: 'http://maps.google.com/mapfiles/ms/icons/yellow-dot.png',
-    position: northEast });
+    position: northEast
+  });
 
   //marker for SouthWest Starting Point
-  var markerSW = new google.maps.Marker({ 
+  var markerSW = new google.maps.Marker({
     id: "Thunderbird Crescent",
     map,
     icon: 'http://maps.google.com/mapfiles/ms/icons/yellow-dot.png',
-    position: southWest });
-  
+    position: southWest
+  });
+
   //marker for SouthEast Starting Point
-  var markerSE = new google.maps.Marker({ 
+  var markerSE = new google.maps.Marker({
     id: "Thunderbird Blvd",
     map,
     icon: 'http://maps.google.com/mapfiles/ms/icons/yellow-dot.png',
-    position: southEast });
+    position: southEast
+  });
 
 
-  }
+}
 
 
 const directionfrom = document.getElementById("from")
 
 
-window.onload=function(){
+window.onload = function () {
   myMap()
-document.getElementById("direction").addEventListener("submit", function(event) {
- event.preventDefault();  // Prevents the default form submission
+  document.getElementById("direction").addEventListener("submit", function (event) {
+    event.preventDefault();  // Prevents the default form submission
 
-  // Get input values
-  directionfields.from = document.getElementById("from").value;
-  directionfields.to = document.getElementById("to").value;
-  const accessible = document.getElementById("accessibilityCheck").checked
+    // Get input values
+    directionfields.from = document.getElementById("from").value;
+    directionfields.to = document.getElementById("to").value;
+    const accessible = document.getElementById("accessibilityCheck").checked
 
-  // Do something with the values (for example, log them to the console)
-  console.log(directionfields.from );
-  console.log(directionfields.to);
-  console.log(accessible);
+    // Do something with the values (for example, log them to the console)
+    console.log(directionfields.from);
+    console.log(directionfields.to);
+    console.log(accessible);
 
-  var directionsService = new google.maps.DirectionsService();
-  var directionsRenderer = new google.maps.DirectionsRenderer();
+  let directionsService = new google.maps.DirectionsService();
+  let directionsRenderer = new google.maps.DirectionsRenderer();
+  let location1 = new google.maps.LatLng(49.262072, -123.250419);
+  let location2 = new google.maps.LatLng(49.26112013421764, -123.24931284699397);
   directionsRenderer.setMap(map);
   console.log("Success");
+  var request = {
+    origin: location1,
+    destination: location2,
+    travelMode: 'WALKING'
+  }
+  directionsService.route(request, function(result, status) {
+    if (status == 'OK') {
+      directionsRenderer.setDirections(result);
+    }
+  });
 
-});}
-  // You can also send the data to a server using AJAX or fetch API
 
-  // Reset the form if needed
-  // this.reset();
+  });
+}
+// You can also send the data to a server using AJAX or fetch API
+
+// Reset the form if needed
+// this.reset();
 
 function switchFromTo() {
   let from = document.getElementById("from").value;
