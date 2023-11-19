@@ -121,10 +121,22 @@ document.getElementById("direction").addEventListener("submit", function(event) 
   console.log(directionfields.to);
   console.log(accessible);
 
-  var directionsService = new google.maps.DirectionsService();
-  var directionsRenderer = new google.maps.DirectionsRenderer();
+  let directionsService = new google.maps.DirectionsService();
+  let directionsRenderer = new google.maps.DirectionsRenderer();
+  let location1 = new google.maps.LatLng(49.262072, -123.250419);
+  let location2 = new google.maps.LatLng(49.26112013421764, -123.24931284699397);
   directionsRenderer.setMap(map);
   console.log("Success");
+  var request = {
+    origin: location1,
+    destination: location2,
+    travelMode: 'WALKING'
+  }
+  directionsService.route(request, function(result, status) {
+    if (status == 'OK') {
+      directionsRenderer.setDirections(result);
+    }
+  });
 
 });}
   // You can also send the data to a server using AJAX or fetch API
