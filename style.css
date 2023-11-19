@@ -1,0 +1,16 @@
+.title {
+    text-align: center;
+}
+
+.map_form {
+    padding: 10px;
+    text-align: center;
+}
+
+#from {
+    margin: 10px;
+}
+
+#to {
+    margin: 10px;
+}
