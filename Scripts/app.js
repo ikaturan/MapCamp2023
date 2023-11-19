@@ -17,12 +17,24 @@ function myMap() {
 
   var markers = [
   
-    { position: myCenter },
-    { position: mainEntrance },
-    { position: leftEntrance },
-    { position: rightEntrance },
-    { position: backEntranceLeft },
-    { position: backEntranceRight },
+    { position: myCenter,
+      title: 'ICICS Building',
+      color: 'blue'},
+    { position: mainEntrance,
+      title: 'Main Entrance',
+      color: 'red' },
+    { position: leftEntrance,
+      title: 'Left Entrance',
+      color: 'red' },
+    { position: rightEntrance,
+      title: 'Right Entrance',
+      color: 'red' },
+    { position: backEntranceLeft,
+      title: 'Back Entrance (Left side of building)',
+      color: 'red' },
+    { position: backEntranceRight,
+      title: 'Back Entrance (Right side of building)',
+      color: 'red' },
 
   ];
 
@@ -30,7 +42,8 @@ function myMap() {
     var marker = new google.maps.Marker({
         position: markerInfo.position,
         map: map,
-        title: markerInfo.title
+        title: markerInfo.title,
+        icon: markerInfo.icon
     });
 });
 
@@ -75,3 +88,5 @@ function myMap() {
 
 
 }
+
+
