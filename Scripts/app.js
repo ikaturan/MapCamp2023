@@ -41,7 +41,7 @@ function myMap() {
 
     };
 
-    const locations = {'ICICS':ICICS}
+  const locations = {'ICICS':ICICS}
 
   for (let id in ICICS) {
     if (ICICS.hasOwnProperty(id)) {
