@@ -1,37 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css" type="text/css">
-    <script src = "scripts/app.js"></script>
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css" type="text/css">
+  <script src="scripts/app.js"></script>
+  <title>Document</title>
 </head>
+
 <body>
 
-    <h1>MapCamp2023</h1>
+  <h1>MapCamp2023</h1>
 
-    
-    <form action="#" method="post">
-      <label for="from">From:</label>
-      <input type="text" id="from" name="from" required>
 
-      <label for="to">To:</label>
-      <input type="text" id="to" name="to" required>
+  <form id="direction"  method="post">
+    <label for="from">From:</label>
+    <input type="text" id="from" name="from" required>
 
-      <label for="accessibility">Accessibility:</label>
-      <select id="accessibility" name="accessibility">
-          <option value="all">All</option>
-          <option value="accessible">Accessible</option>
-          <option value="not_accessible">Not Accessible</option>
-      </select>
+    <label for="to">To:</label>
+    <input type="text" id="to" name="to" required>
 
-      <input type="submit" value="Submit">
+    <label for="accessibility">Accessibility:</label>
+    <select id="accessibility" name="accessibility">
+      <option value="all">All</option>
+      <option value="accessible">Accessible</option>
+      <option value="not_accessible">Not Accessible</option>
+    </select>
+
+    <input type="submit" value="Submit">
   </form>
+  
   <div id="googleMap" style="width:100%;height:400px;"></div>
-    
-    <script src="https://maps.googleapis.com/maps/api/js?callback=myMap"></script> 
+
+  <script src="https://maps.googleapis.com/maps/api/js?callback=myMap"></script>
 
 </body>
 <!-- <script src= "/scripts/app.js"> </script> -->
+
 </html>
