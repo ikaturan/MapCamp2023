@@ -19,26 +19,27 @@ function myMap() {
   const backEntranceLeft = { lat: 49.2611364, lng: -123.2483529 };
   const backEntranceRight = { lat: 49.2614651, lng: -123.248713 };
 
-  var markers = [
+  const ICICS = {
   
+    'Main Building': 
     { position: myCenter,
-      title: 'ICICS Building',
+      id: 'ICICS Building',
       icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'},
     { position: mainEntrance,
-      title: 'Main Entrance' },
+      id: 'Main Entrance' },
     { position: leftEntrance,
-      title: 'Left Entrance' },
+      id: 'Left Entrance' },
     { position: rightEntrance,
-      title: 'Right Entrance' },
+      id: 'Right Entrance' },
     { position: backEntranceLeft,
-      title: 'Back Entrance (Left side of building)' },
+      id: 'Back Entrance left side' },
     { position: backEntranceRight,
-      title: 'Back Entrance (Right side of building)' },
+      id: 'Back Entrance right side' },
 
-  ];
+    };
 
   markers.forEach(function (markerInfo) {
-    var marker = new google.maps.Marker({
+    let marker = new google.maps.Marker({
         position: markerInfo.position,
         map: map,
         title: markerInfo.title,
