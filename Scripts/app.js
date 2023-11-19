@@ -107,10 +107,8 @@ function myMap() {
     icon: 'http://maps.google.com/mapfiles/ms/icons/yellow-dot.png',
     position: southEast });
 
-  
 
-
-}
+  }
 
 
 const directionfrom = document.getElementById("from")
@@ -135,3 +133,9 @@ document.getElementById("direction").addEventListener("submit", function(event) 
   // Reset the form if needed
   // this.reset();
 
+function switchFromTo() {
+  let from = document.getElementById("from").value;
+  let to = document.getElementById("to").value;
+  document.getElementById("from").value = to;
+  document.getElementById("to").value = from;
+}
