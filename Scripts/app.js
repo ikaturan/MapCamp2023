@@ -27,6 +27,8 @@ const ICICS = {
     access: true,
      },
 
+    }
+
 const locations = { 'ICICS': ICICS }
 
 function myMap() {
