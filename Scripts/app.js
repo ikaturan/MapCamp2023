@@ -43,18 +43,21 @@ function myMap() {
 
   const locations = {'ICICS':ICICS}
 
-  for (let id in ICICS) {
-    if (ICICS.hasOwnProperty(id)) {
-      let markerInfo = ICICS[id];
+  for (let building in locations) {
+    let markers = locations[building];
+  
+      for (let id in markers) {
+        if (markers.hasOwnProperty(id)) {
+          let markerInfo = markers[id];
       
-      let marker = new google.maps.Marker({
-          position: markerInfo.position,
-          map: map,
-          title: id,
-          icon: markerInfo.icon
+          let marker = new google.maps.Marker({
+            position: markerInfo.position,
+            map: map,
+            title: id,
+            icon: markerInfo.icon
     });
 
-}};
+}}};
   
 
 
