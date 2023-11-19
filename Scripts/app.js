@@ -100,7 +100,12 @@ function myMap() {
 
 }
 
+
+const directionfrom = document.getElementById("from")
+
+
 window.onload=function(){
+  myMap()
 document.getElementById("direction").addEventListener("submit", function(event) {
  event.preventDefault();  // Prevents the default form submission
 
