@@ -1,31 +1,40 @@
 
-var directionfields = { from: 49.2606, to: -123.2460 }
+var directionfields = {
+  from: { lat: 49.2606, lng: -123.2460 },
+  to: { lat: 49.2606, lng: -123.2460 }
+}
 
 var direction = document.getElementById("direction")
 var map;
 
 const ICICS = {
-  
+
   mainEntrance:
-  { position: { lat: 49.26112013421764, lng: -123.24931284699397 },
+  {
+    position: { lat: 49.26112013421764, lng: -123.24931284699397 },
     access: false,
-    },
+  },
   leftEntrance:
-  { position: { lat: 49.260732, lng: -123.248916 },
+  {
+    position: { lat: 49.260732, lng: -123.248916 },
     access: true,
-     },
+  },
   rightEntrance:
-  { position: { lat: 49.26142733612942, lng: -123.24900841627249},
+  {
+    position: { lat: 49.26142733612942, lng: -123.24900841627249 },
     access: true,
-     },
+  },
   backEntranceLS:
-  { position: { lat: 49.2611364, lng: -123.2483529 },
+  {
+    position: { lat: 49.2611364, lng: -123.2483529 },
     access: false,
-     },
+  },
   backEntranceRS:
-  { position: { lat: 49.2614651, lng: -123.248713 },
+  {
+    position: { lat: 49.2614651, lng: -123.248713 },
     access: true,
-     },
+  },
+}
 
     }
 
@@ -120,6 +129,7 @@ function myMap() {
 }
 
 
+
 const directionfrom = document.getElementById("from")
 
 
@@ -138,26 +148,35 @@ window.onload = function () {
     console.log(directionfields.to);
     console.log(accessible);
 
-  let directionsService = new google.maps.DirectionsService();
-  let directionsRenderer = new google.maps.DirectionsRenderer();
-  let location1 = new google.maps.LatLng(49.262072, -123.250419);
-  let location2 = new google.maps.LatLng(49.26112013421764, -123.24931284699397);
-  directionsRenderer.setMap(map);
-  console.log("Success");
-  var request = {
-    origin: location1,
-    destination: location2,
-    travelMode: 'WALKING'
-  }
-  directionsService.route(request, function(result, status) {
-    if (status == 'OK') {
-      directionsRenderer.setDirections(result);
+    const leftEntrance = { lat: 49.260732, lng: -123.248916 };
+    let directionsService = new google.maps.DirectionsService();
+    let directionsRenderer = new google.maps.DirectionsRenderer();
+   // let location1 = new google.maps.LatLng(49.262072, -123.250419);
+    let location2 = new google.maps.LatLng(49.26112013421764, -123.24931284699397);
+    directionsRenderer.setMap(map);
+    console.log("Success");
+    var request = {
+      origin: leftEntrance,
+      destination: location2,
+      travelMode: 'WALKING'
     }
-  });
+    directionsService.route(request, function(result, status) {
+      if (status == 'OK') {
+        console.log(result.routes[0].legs[0].distance.value)
+        directionsRenderer.setDirections(result);
+      }
+    });
+
+    
 
 
-  });
+
+  }
+
+  );
 }
+
+
 // You can also send the data to a server using AJAX or fetch API
 
 // Reset the form if needed
