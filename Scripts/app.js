@@ -70,28 +70,28 @@ function myMap() {
 
   //marker for NorthWest Starting Point
   var markerNW = new google.maps.Marker({ 
-    title: "Main Mall",
+    id: "Main Mall",
     map,
     icon: 'http://maps.google.com/mapfiles/ms/icons/yellow-dot.png',
     position: northWest });
 
   //marker for NorthEast Starting Point
   var markerNE = new google.maps.Marker({ 
-    title: "UBC Chemical and Biological Engineering",
+    id: "UBC Chemical and Biological Engineering",
     map,
     icon: 'http://maps.google.com/mapfiles/ms/icons/yellow-dot.png',
     position: northEast });
 
   //marker for SouthWest Starting Point
   var markerSW = new google.maps.Marker({ 
-    title: "Thunderbird Crescent",
+    id: "Thunderbird Crescent",
     map,
     icon: 'http://maps.google.com/mapfiles/ms/icons/yellow-dot.png',
     position: southWest });
   
   //marker for SouthEast Starting Point
   var markerSE = new google.maps.Marker({ 
-    title: "Thunderbird Blvd",
+    id: "Thunderbird Blvd",
     map,
     icon: 'http://maps.google.com/mapfiles/ms/icons/yellow-dot.png',
     position: southEast });
