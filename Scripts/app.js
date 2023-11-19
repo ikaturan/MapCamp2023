@@ -21,31 +21,42 @@ function myMap() {
 
   const ICICS = {
   
-    'Main Building': 
-    { position: myCenter,
-      id: 'ICICS Building',
-      icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'},
+    'Main Entrance':
     { position: mainEntrance,
-      id: 'Main Entrance' },
+      },
+      'Left Entrance':
     { position: leftEntrance,
-      id: 'Left Entrance' },
+       },
+    'Right Entrance':
     { position: rightEntrance,
-      id: 'Right Entrance' },
+       },
+    'Back Entrance left side':
     { position: backEntranceLeft,
-      id: 'Back Entrance left side' },
+       },
+    'Back Entrance right side':
     { position: backEntranceRight,
-      id: 'Back Entrance right side' },
+       },
+
+    
 
     };
 
-  markers.forEach(function (markerInfo) {
-    let marker = new google.maps.Marker({
-        position: markerInfo.position,
-        map: map,
-        title: markerInfo.title,
-        icon: markerInfo.icon
+    const locations = {'ICICS':ICICS}
+
+  for (let id in ICICS) {
+    if (ICICS.hasOwnProperty(id)) {
+      let markerInfo = ICICS[id];
+      
+      let marker = new google.maps.Marker({
+          position: markerInfo.position,
+          map: map,
+          title: id,
+          icon: markerInfo.icon
     });
-});
+
+}};
+  
+
 
 
   //varible NorthWest of ICICS @ Longitude: 49.262072, Latitude: -123.250419
