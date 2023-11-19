@@ -1,8 +1,19 @@
 
-var directionfields = {from:49.2606, to:-123.2460}
+var directionfields = { from: 49.2606, to: -123.2460 }
 
 var direction = document.getElementById("direction")
 var map;
+
+const locations = { 'ICICS': ICICS }
+
+const ICICS = {
+  mainEntrance: { lat: 49.26112013421764, lng: -123.24931284699397 },
+  leftEntrance: { lat: 49.260732, lng: -123.248916 },
+  rightEntrance: { lat: 49.26142733612942, lng: -123.24900841627249 },
+  backEntranceLeft: { lat: 49.2611364, lng: -123.2483529 },
+  backEntranceRight: { lat: 49.2614651, lng: -123.248713 },
+};
+
 
 
 function myMap() {
@@ -14,39 +25,28 @@ function myMap() {
 
   const myCenter = { lat: 49.261199779342405, lng: -123.24890381012028 };
 
-  const mainEntrance = { lat: 49.26112013421764, lng: -123.24931284699397 };
 
-  const leftEntrance = { lat: 49.260732, lng: -123.248916 };
-  const rightEntrance = { lat: 49.26142733612942, lng: -123.24900841627249};
-  const backEntranceLeft = { lat: 49.2611364, lng: -123.2483529 };
-  const backEntranceRight = { lat: 49.2614651, lng: -123.248713 };
 
-  var markers = [
-  
-    { position: myCenter,
-      title: 'ICICS Building',
-      icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'},
-    { position: mainEntrance,
-      title: 'Main Entrance' },
-    { position: leftEntrance,
-      title: 'Left Entrance' },
-    { position: rightEntrance,
-      title: 'Right Entrance' },
-    { position: backEntranceLeft,
-      title: 'Back Entrance (Left side of building)' },
-    { position: backEntranceRight,
-      title: 'Back Entrance (Right side of building)' },
 
-  ];
+  for (let building in locations) {
+    let markers = locations[building];
 
-  markers.forEach(function (markerInfo) {
-    var marker = new google.maps.Marker({
-        position: markerInfo.position,
-        map: map,
-        title: markerInfo.title,
-        icon: markerInfo.icon
-    });
-});
+    for (let id in markers) {
+      if (markers.hasOwnProperty(id)) {
+        let markerInfo = markers[id];
+
+        let marker = new google.maps.Marker({
+          position: markerInfo.position,
+          map: map,
+          title: id,
+          icon: markerInfo.icon
+        });
+
+      }
+    }
+  };
+
+
 
 
   //varible NorthWest of ICICS @ Longitude: 49.262072, Latitude: -123.250419
@@ -70,34 +70,36 @@ function myMap() {
   const southEast = { lat: southEastLong, lng: southEastLat };
 
   //marker for NorthWest Starting Point
-  var markerNW = new google.maps.Marker({ 
+  var markerNW = new google.maps.Marker({
     id: "Main Mall",
     map,
     icon: 'http://maps.google.com/mapfiles/ms/icons/yellow-dot.png',
-    position: northWest });
+    position: northWest
+  });
 
   //marker for NorthEast Starting Point
-  var markerNE = new google.maps.Marker({ 
+  var markerNE = new google.maps.Marker({
     id: "UBC Chemical and Biological Engineering",
     map,
     icon: 'http://maps.google.com/mapfiles/ms/icons/yellow-dot.png',
-    position: northEast });
+    position: northEast
+  });
 
   //marker for SouthWest Starting Point
-  var markerSW = new google.maps.Marker({ 
+  var markerSW = new google.maps.Marker({
     id: "Thunderbird Crescent",
     map,
     icon: 'http://maps.google.com/mapfiles/ms/icons/yellow-dot.png',
-    position: southWest });
-  
+    position: southWest
+  });
+
   //marker for SouthEast Starting Point
-  var markerSE = new google.maps.Marker({ 
+  var markerSE = new google.maps.Marker({
     id: "Thunderbird Blvd",
     map,
     icon: 'http://maps.google.com/mapfiles/ms/icons/yellow-dot.png',
-    position: southEast });
-
-  
+    position: southEast
+  });
 
 
 }
@@ -106,20 +108,20 @@ function myMap() {
 const directionfrom = document.getElementById("from")
 
 
-window.onload=function(){
+window.onload = function () {
   myMap()
-document.getElementById("direction").addEventListener("submit", function(event) {
- event.preventDefault();  // Prevents the default form submission
+  document.getElementById("direction").addEventListener("submit", function (event) {
+    event.preventDefault();  // Prevents the default form submission
 
-  // Get input values
-  directionfields.from = document.getElementById("from").value;
-  directionfields.to = document.getElementById("to").value;
-  const accessible = document.getElementById("accessibilityCheck").checked
+    // Get input values
+    directionfields.from = document.getElementById("from").value;
+    directionfields.to = document.getElementById("to").value;
+    const accessible = document.getElementById("accessibilityCheck").checked
 
-  // Do something with the values (for example, log them to the console)
-  console.log(directionfields.from );
-  console.log(directionfields.to);
-  console.log(accessible);
+    // Do something with the values (for example, log them to the console)
+    console.log(directionfields.from);
+    console.log(directionfields.to);
+    console.log(accessible);
 
   let directionsService = new google.maps.DirectionsService();
   let directionsRenderer = new google.maps.DirectionsRenderer();
@@ -138,9 +140,17 @@ document.getElementById("direction").addEventListener("submit", function(event) 
     }
   });
 
-});}
-  // You can also send the data to a server using AJAX or fetch API
 
-  // Reset the form if needed
-  // this.reset();
+  });
+}
+// You can also send the data to a server using AJAX or fetch API
 
+// Reset the form if needed
+// this.reset();
+
+function switchFromTo() {
+  let from = document.getElementById("from").value;
+  let to = document.getElementById("to").value;
+  document.getElementById("from").value = to;
+  document.getElementById("to").value = from;
+}
