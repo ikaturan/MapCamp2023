@@ -2,6 +2,7 @@
 var directionfields = {from:49.2606, to:-123.2460}
 
 var direction = document.getElementById("direction")
+var map;
 
 
 function myMap() {
@@ -9,7 +10,8 @@ function myMap() {
     center: new google.maps.LatLng(49.261199779342405, -123.24890381012028),
     zoom: 18,
   };
-  var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+  map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+
   const myCenter = { lat: 49.261199779342405, lng: -123.24890381012028 };
 
   const mainEntrance = { lat: 49.26112013421764, lng: -123.24931284699397 };
@@ -122,10 +124,17 @@ document.getElementById("direction").addEventListener("submit", function(event) 
   // Get input values
   directionfields.from = document.getElementById("from").value;
   directionfields.to = document.getElementById("to").value;
+  const accessible = document.getElementById("accessibilityCheck").checked
 
   // Do something with the values (for example, log them to the console)
   console.log(directionfields.from );
   console.log(directionfields.to);
+  console.log(accessible);
+
+  var directionsService = new google.maps.DirectionsService();
+  var directionsRenderer = new google.maps.DirectionsRenderer();
+  directionsRenderer.setMap(map);
+  console.log("Success");
 
 });}
   // You can also send the data to a server using AJAX or fetch API
