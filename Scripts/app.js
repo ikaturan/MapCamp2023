@@ -19,22 +19,17 @@ function myMap() {
   
     { position: myCenter,
       title: 'ICICS Building',
-      color: 'blue'},
+      icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'},
     { position: mainEntrance,
-      title: 'Main Entrance',
-      color: 'red' },
+      title: 'Main Entrance' },
     { position: leftEntrance,
-      title: 'Left Entrance',
-      color: 'red' },
+      title: 'Left Entrance' },
     { position: rightEntrance,
-      title: 'Right Entrance',
-      color: 'red' },
+      title: 'Right Entrance' },
     { position: backEntranceLeft,
-      title: 'Back Entrance (Left side of building)',
-      color: 'red' },
+      title: 'Back Entrance (Left side of building)' },
     { position: backEntranceRight,
-      title: 'Back Entrance (Right side of building)',
-      color: 'red' },
+      title: 'Back Entrance (Right side of building)' },
 
   ];
 
