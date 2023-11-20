@@ -6,6 +6,11 @@ var directionfields = {
 
 var direction = document.getElementById("direction")
 var map;
+var startingLocation;
+var markerNW;
+var markerNE;
+var markerSW;
+var markerSE;
 
 const ICICS = {
 
@@ -33,10 +38,13 @@ const ICICS = {
   {
     position: { lat: 49.2614651, lng: -123.248713 },
     access: true,
+
+
   },
 }
 
     }
+
 
 const locations = { 'ICICS': ICICS }
 
@@ -73,28 +81,28 @@ function myMap() {
 
 
 
-  //varible NorthWest of ICICS @ Longitude: 49.262072, Latitude: -123.250419
-  var northWestLong = 49.262072;
-  var northWestLat = -123.250419;
-  const northWest = { lat: northWestLong, lng: northWestLat };
+  //varible NorthWest of ICICS @ Latitude: 49.262072, Longitude: -123.250419
+  var northWestLat = 49.262072;
+  var northWestLong = -123.250419;
+  const northWest = { lat: northWestLat, lng: northWestLong };
 
-  //varible NorthEast of ICICS @ Longitude: 49.2625, Latitude: -123.2474
-  var northEastLong = 49.2625;
-  var northEastLat = -123.2474;
-  const northEast = { lat: northEastLong, lng: northEastLat };
+  //varible NorthEast of ICICS @ Latitude: 49.2625, Longitude: -123.2474
+  var northEastLat = 49.2625;
+  var northEastLong = -123.2474;
+  const northEast = { lat: northEastLat, lng: northEastLong };
 
-  //varible SouthWest of ICICS @ Longitude: 49.259097, Latitude: -123.249079
-  var southWestLong = 49.259097;
-  var southWestLat = -123.249079;
-  const southWest = { lat: southWestLong, lng: southWestLat };
+  //varible SouthWest of ICICS @ Latitude: 49.259097, Longitude: -123.249079
+  var southWestLat = 49.259097;
+  var southWestLong = -123.249079;
+  const southWest = { lat: southWestLat, lng: southWestLong };
 
-  //varible SouthEast of ICICS @ Longitude: 49.260634, Latitude: -123.244685
-  var southEastLong = 49.260634;
-  var southEastLat = -123.244685;
-  const southEast = { lat: southEastLong, lng: southEastLat };
+  //varible SouthEast of ICICS @ Latitude: 49.260634, Longitude: -123.244685
+  var southEastLat = 49.260634;
+  var southEastLong = -123.244685;
+  const southEast = { lat: southEastLat, lng: southEastLong };
 
   //marker for NorthWest Starting Point
-  var markerNW = new google.maps.Marker({
+  markerNW = new google.maps.Marker({
     id: "Main Mall",
     map,
     icon: 'http://maps.google.com/mapfiles/ms/icons/yellow-dot.png',
@@ -102,7 +110,7 @@ function myMap() {
   });
 
   //marker for NorthEast Starting Point
-  var markerNE = new google.maps.Marker({
+  markerNE = new google.maps.Marker({
     id: "UBC Chemical and Biological Engineering",
     map,
     icon: 'http://maps.google.com/mapfiles/ms/icons/yellow-dot.png',
@@ -110,7 +118,7 @@ function myMap() {
   });
 
   //marker for SouthWest Starting Point
-  var markerSW = new google.maps.Marker({
+  markerSW = new google.maps.Marker({
     id: "Thunderbird Crescent",
     map,
     icon: 'http://maps.google.com/mapfiles/ms/icons/yellow-dot.png',
@@ -118,7 +126,7 @@ function myMap() {
   });
 
   //marker for SouthEast Starting Point
-  var markerSE = new google.maps.Marker({
+  markerSE = new google.maps.Marker({
     id: "Thunderbird Blvd",
     map,
     icon: 'http://maps.google.com/mapfiles/ms/icons/yellow-dot.png',
@@ -126,6 +134,9 @@ function myMap() {
   });
 
 
+
+
+  
 }
 
 
@@ -148,6 +159,30 @@ window.onload = function () {
     console.log(directionfields.to);
     console.log(accessible);
 
+        // Produce marker's Latitude and Longitude; else produce error message
+    if (directionfields.from == markerNW.id) {
+      startingLocation = markerNW.position;
+    } else if (directionfields.from == markerNE.id) {
+      startingLocation = markerNE.position;
+    } else if (directionfields.from == markerSW.id) {
+      startingLocation = markerSW.position;
+    } else if (directionfields.from == markerSE.id) {
+      startingLocation = markerSE.position;
+    } else {
+      startingLocation = "Error: Location not found.";
+    }
+
+    console.log(startingLocation);
+
+
+
+
+
+
+
+
+ 
+
     const leftEntrance = { lat: 49.260732, lng: -123.248916 };
     let directionsService = new google.maps.DirectionsService();
     let directionsRenderer = new google.maps.DirectionsRenderer();
@@ -159,6 +194,7 @@ window.onload = function () {
       origin: leftEntrance,
       destination: location2,
       travelMode: 'WALKING'
+
     }
     directionsService.route(request, function(result, status) {
       if (status == 'OK') {
