@@ -187,7 +187,7 @@ window.onload = function () {
 
 
   
-  });
+  
 
     console.log(startingLocation);
 
