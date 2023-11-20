@@ -216,11 +216,11 @@ window.onload = function () {
 
     
     const endingPos = accessiblePositions;
-    var bestDistance;
-    var bestEndingPos = endingPos[0];
+    let bestDistance;
+    let bestEndingPos = endingPos[0];
 
     for (let i = 0; i < endingPos.length; i++) {
-      var request = {
+      let request = {
         origin: startingLocation,
         destination: endingPos[i],
         travelMode: 'WALKING'
@@ -228,13 +228,16 @@ window.onload = function () {
 
       directionsService.route(request, function(result, status) {
         if (status == 'OK') {
-          distance = console.log(result.routes[0].legs[0].distance.value)
+          distance = result.routes[0].legs[0].distance.value
           console.log(distance);
           console.log(bestEndingPos);
+          console.log(bestDistance)
           if (i == 0) {
             bestDistance = distance;
           }
-          if (distance < bestDistance) {
+          else if (distance <= bestDistance) {
+            bestDistance = distance;
+            
             bestEndingPos = endingPos[i];
           }
         }
