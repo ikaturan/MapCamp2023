@@ -241,6 +241,12 @@ window.onload = function () {
       })
     }
 
+
+
+
+console.log(`Best distance: ${bestDistance}`);
+console.log(`Best ending position: ${bestEndingPos}`);
+
     var request = {
       origin: startingLocation,
       destination: bestEndingPos,
