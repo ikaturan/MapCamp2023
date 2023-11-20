@@ -159,7 +159,10 @@ window.onload = function () {
     console.log(directionfields.to);
     console.log(accessible);
   
-  isAccessTrue()
+
+  let accessiblePositions;
+
+  isAccessTrue();
 
   function isAccessTrue() {
     let accessibleDoors = Object.assign({}, ICICS);
@@ -167,11 +170,11 @@ window.onload = function () {
       for (let door in accessibleDoors) {
         if (accessibleDoors[door].access === false) {
           delete accessibleDoors[door];
-          let accessiblePositions = Object.values(accessibleDoors).map(doors => doors.position);
+          accessiblePositions = Object.values(accessibleDoors).map(doors => doors.position);
           console.log(accessiblePositions);
         }}}
     else if (accessible === false)
-    { let accessiblePositions = Object.values(accessibleDoors).map(doors => doors.position);
+    { accessiblePositions = Object.values(accessibleDoors).map(doors => doors.position);
       console.log(accessiblePositions);}
   }
 
@@ -212,7 +215,7 @@ window.onload = function () {
     console.log("Success");
 
     
-    const endingPos = [{ lat: 49.26112013421764, lng: -123.24931284699397 }, { lat: 55.260732, lng: -123.248916 }]
+    const endingPos = accessiblePositions;
     var bestDistance;
     var bestEndingPos = endingPos[0];
 
