@@ -188,18 +188,47 @@ window.onload = function () {
     let location2 = new google.maps.LatLng(49.26112013421764, -123.24931284699397);
     directionsRenderer.setMap(map);
     console.log("Success");
-    var request = {
-      origin: leftEntrance,
-      destination: location2,
-      travelMode: 'WALKING'
 
+    
+    const endingPos = [{ lat: 49.26112013421764, lng: -123.24931284699397 }, { lat: 55.260732, lng: -123.248916 }]
+    var bestDistance;
+    var bestEndingPos = endingPos[0];
+
+    for (let i = 0; i < endingPos.length; i++) {
+      var request = {
+        origin: startingLocation,
+        destination: endingPos[i],
+        travelMode: 'WALKING'
+      }
+
+      directionsService.route(request, function(result, status) {
+        if (status == 'OK') {
+          distance = console.log(result.routes[0].legs[0].distance.value)
+          console.log(distance);
+          console.log(bestEndingPos);
+          if (i == 0) {
+            bestDistance = distance;
+          }
+          if (distance < bestDistance) {
+            bestEndingPos = endingPos[i];
+          }
+        }
+      })
     }
+
+    var request = {
+      origin: startingLocation,
+      destination: bestEndingPos,
+      travelMode: 'WALKING'
+    }
+
     directionsService.route(request, function(result, status) {
       if (status == 'OK') {
-        console.log(result.routes[0].legs[0].distance.value)
         directionsRenderer.setDirections(result);
       }
-    });
+    })
+
+
 
     
 
