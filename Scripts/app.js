@@ -167,9 +167,12 @@ window.onload = function () {
       for (let door in accessibleDoors) {
         if (accessibleDoors[door].access === false) {
           delete accessibleDoors[door];
-          console.log(accessibleDoors);
+          let accessiblePositions = Object.values(accessibleDoors).map(doors => doors.position);
+          console.log(accessiblePositions);
         }}}
-    else if (accessible === false) {console.log(accessibleDoors);}
+    else if (accessible === false)
+    { let accessiblePositions = Object.values(accessibleDoors).map(doors => doors.position);
+      console.log(accessiblePositions);}
   }
 
         // Produce marker's Latitude and Longitude; else produce error message
