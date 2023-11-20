@@ -4,6 +4,7 @@ var directionfields = { from: 49.2606, to: -123.2460 }
 var direction = document.getElementById("direction")
 var map;
 
+
 const ICICS = {
   
   mainEntrance:
@@ -43,17 +44,17 @@ function myMap() {
 
 
 
-  for (let building in locations) {
-    let markers = locations[building];
+  for (let buildings in locations) {
+    let building = locations[buildings];
 
-    for (let id in markers) {
-      if (markers.hasOwnProperty(id)) {
-        let markerInfo = markers[id];
+    for (let door in building) {
+      if (building.hasOwnProperty(door)) {
+        let markerInfo = building[door];
 
         let marker = new google.maps.Marker({
           position: markerInfo.position,
           map: map,
-          title: id,
+          title: door,
           icon: markerInfo.icon
         });
 
@@ -123,6 +124,7 @@ function myMap() {
 const directionfrom = document.getElementById("from")
 
 
+
 window.onload = function () {
   myMap()
   document.getElementById("direction").addEventListener("submit", function (event) {
@@ -131,12 +133,25 @@ window.onload = function () {
     // Get input values
     directionfields.from = document.getElementById("from").value;
     directionfields.to = document.getElementById("to").value;
-    const accessible = document.getElementById("accessibilityCheck").checked
+    let accessible = document.getElementById("accessibilityCheck").checked
 
     // Do something with the values (for example, log them to the console)
     console.log(directionfields.from);
     console.log(directionfields.to);
     console.log(accessible);
+  
+  isAccessTrue()
+
+  function isAccessTrue() {
+    let accessibleDoors = Object.assign({}, ICICS);
+    if (accessible === true) {
+      for (let door in accessibleDoors) {
+        if (accessibleDoors[door].access === false) {
+          delete accessibleDoors[door];
+          console.log(accessibleDoors);
+        }}}
+    else if (accessible === false) {console.log(accessibleDoors);}
+  }
 
   let directionsService = new google.maps.DirectionsService();
   let directionsRenderer = new google.maps.DirectionsRenderer();
@@ -153,6 +168,8 @@ window.onload = function () {
     if (status == 'OK') {
       directionsRenderer.setDirections(result);
     }
+
+  
   });
 
 
@@ -169,3 +186,7 @@ function switchFromTo() {
   document.getElementById("from").value = to;
   document.getElementById("to").value = from;
 }
+
+
+
+
