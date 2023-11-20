@@ -135,7 +135,7 @@ function myMap() {
 
 
 
-  
+
 }
 
 
@@ -144,9 +144,9 @@ const directionfrom = document.getElementById("from")
 
 
 
-window.onload = function () {
+window.onload = async function () {
   myMap()
-  document.getElementById("direction").addEventListener("submit", function (event) {
+  document.getElementById("direction").addEventListener("submit", async function (event) {
     event.preventDefault();  // Prevents the default form submission
 
     // Get input values
@@ -158,27 +158,30 @@ window.onload = function () {
     console.log(directionfields.from);
     console.log(directionfields.to);
     console.log(accessible);
-  
 
-  let accessiblePositions;
 
-  isAccessTrue();
+    let accessiblePositions;
 
-  function isAccessTrue() {
-    let accessibleDoors = Object.assign({}, ICICS);
-    if (accessible === true) {
-      for (let door in accessibleDoors) {
-        if (accessibleDoors[door].access === false) {
-          delete accessibleDoors[door];
-          accessiblePositions = Object.values(accessibleDoors).map(doors => doors.position);
-          console.log(accessiblePositions);
-        }}}
-    else if (accessible === false)
-    { accessiblePositions = Object.values(accessibleDoors).map(doors => doors.position);
-      console.log(accessiblePositions);}
-  }
+    isAccessTrue();
 
-        // Produce marker's Latitude and Longitude; else produce error message
+    function isAccessTrue() {
+      let accessibleDoors = Object.assign({}, ICICS);
+      if (accessible === true) {
+        for (let door in accessibleDoors) {
+          if (accessibleDoors[door].access === false) {
+            delete accessibleDoors[door];
+            accessiblePositions = Object.values(accessibleDoors).map(doors => doors.position);
+            console.log(accessiblePositions);
+          }
+        }
+      }
+      else if (accessible === false) {
+        accessiblePositions = Object.values(accessibleDoors).map(doors => doors.position);
+        console.log(accessiblePositions);
+      }
+    }
+
+    // Produce marker's Latitude and Longitude; else produce error message
     if (directionfields.from == markerNW.id) {
       startingLocation = markerNW.position;
     } else if (directionfields.from == markerNE.id) {
@@ -192,8 +195,8 @@ window.onload = function () {
     }
 
 
-  
-  
+
+
 
     console.log(startingLocation);
 
@@ -204,53 +207,59 @@ window.onload = function () {
 
 
 
- 
+
 
     const leftEntrance = { lat: 49.260732, lng: -123.248916 };
     let directionsService = new google.maps.DirectionsService();
     let directionsRenderer = new google.maps.DirectionsRenderer();
-   // let location1 = new google.maps.LatLng(49.262072, -123.250419);
+    // let location1 = new google.maps.LatLng(49.262072, -123.250419);
     let location2 = new google.maps.LatLng(49.26112013421764, -123.24931284699397);
     directionsRenderer.setMap(map);
     console.log("Success");
 
-    
+
     const endingPos = accessiblePositions;
     let bestDistance;
     let bestEndingPos = endingPos[0];
 
+    
     for (let i = 0; i < endingPos.length; i++) {
       let request = {
         origin: startingLocation,
         destination: endingPos[i],
         travelMode: 'WALKING'
       }
+      await new Promise(resolve => {
+        directionsService.route(request, function (result, status) {
+          if (status == 'OK') {
+            distance = result.routes[0].legs[0].distance.value
+            console.log(distance);
+            console.log(bestEndingPos);
+            console.log(bestDistance)
+            if (i == 0) {
+              bestDistance = distance;
+            }
+            else if (distance <= bestDistance) {
+              bestDistance = distance;
 
-      directionsService.route(request, function(result, status) {
-        if (status == 'OK') {
-          distance = result.routes[0].legs[0].distance.value
-          console.log(distance);
-          console.log(bestEndingPos);
-          console.log(bestDistance)
-          if (i == 0) {
-            bestDistance = distance;
+              bestEndingPos = endingPos[i];
+            }
           }
-          else if (distance <= bestDistance) {
-            bestDistance = distance;
-            
-            bestEndingPos = endingPos[i];
-          }
-        }
+          resolve()
+        })
       })
     }
 
-    var request = {
+
+
+
+    let request = {
       origin: startingLocation,
       destination: bestEndingPos,
       travelMode: 'WALKING'
     }
 
-    directionsService.route(request, function(result, status) {
+    directionsService.route(request, function (result, status) {
       if (status == 'OK') {
         directionsRenderer.setDirections(result);
       }
@@ -258,7 +267,7 @@ window.onload = function () {
 
 
 
-    
+
 
 
 
