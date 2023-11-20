@@ -43,8 +43,6 @@ const ICICS = {
   },
 }
 
-    }
-
 
 const locations = { 'ICICS': ICICS }
 
